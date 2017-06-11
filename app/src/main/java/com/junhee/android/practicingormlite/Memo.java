@@ -24,28 +24,25 @@ public class Memo {
     @DatabaseField
     private String date;
 
-    private boolean isChecked;
+    private boolean isSelected;
 
-
-
-    public boolean isChecked() {
-        return isChecked;
-    }
-
-    public void setChecked(boolean checked) {
-        isChecked = checked;
-    }
-
-    public Memo() {
-        setDate();
-    }
-
-    public Memo(String title, String content){
+    public Memo(String title, String content) {
         this.title = title;
         this.content = content;
         setDate();
     }
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public Memo() {
+        setDate();
+    }
 
     public String getDate() {
         return date;

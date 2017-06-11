@@ -15,7 +15,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    // DetailActivity.class에서 가져다 쓰려고 스태틱변수 만듬
+    // TODO 좋은 설계란 느낌은 안들지만 대안이 있다면 물어보자
     public static List<Memo> memos = null;
+    List<Memo> delMemos = null;
     Button btnAdd, btnDel;
     RecyclerView recyclerView;
     RecyclerAdapter adapter;
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         dao = new MemoDao(this);
         Log.i("READ ALL", "================= [ Main : readall ] ");
-        // TODO 다시 생각하기
+        // TODO onResume(); 시, 두 번 호출되기 때문에 다시 생각하기
         memos = dao.readAll();
 
         // 리사이클러 뷰와 어댑터 생성
@@ -57,8 +60,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(v.getContext(), DetailActivity.class);
                 startActivity(intent);
                 break;
-
+            // TODO 수정했음
             case R.id.btnDel:
+/*
+                delMemos = RecyclerAdapter.checkedList;
+                for(Memo memo : delMemos){
+                    memos.remove(memo.getId());
+                    dao.delete(memo.getId());
+                }
+                memos.clear();
+                memos = dao.readAll();
+                adapter.setMemoList(memos);
+                adapter.notifyDataSetChanged();
+*/
+
+
+
 
                 // TODO 체크박스 삽입 혹은 다중 선택 삭제 로직 처리
                 break;

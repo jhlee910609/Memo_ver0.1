@@ -19,8 +19,7 @@ import static com.junhee.android.practicingormlite.DetailActivity.DOC_KEY;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder> {
 
-    // public static List<Memo> del_list;
-
+    public static List<Memo> checkedList;
     List<Memo> memos;
     Context context;
     MemoDao dao;
@@ -29,7 +28,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
     public RecyclerAdapter(List<Memo> memos, Context context) {
         dao = new MemoDao(context);
         this.memos = memos;
-        this.context =context;
+        this.context = context;
     }
 
     @Override
@@ -39,34 +38,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, final int position) {
+    public void onBindViewHolder(final Holder holder, final int position) {
         memo = memos.get(position);
         holder.setTitle(memo.getTitle());
         holder.setDate(memo.getDate().toString());
         holder.setMemo_id(memo.getId());
-
- /*      ===== [ 삭제용 체크박스 만들기 ] ====
-
-        holder.checkBox.setChecked(memo.isChecked());
-        holder.checkBox.setTag(memos.get(position));
-
-        holder.checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                del_list = new ArrayList<Memo>();
-                CheckBox cb = (CheckBox) v;
-                Memo del_memo = (Memo) v.getTag();
-                del_list.add(del_memo);
-
-                del_memo.setChecked(cb.isChecked());
-                memos.get(position).setChecked(cb.isChecked());
-            }
-        });
-
-        */
     }
 
-    public void setMemoList(List<Memo> memos){
+    public void setMemoList(List<Memo> memos) {
         this.memos = memos;
     }
 
@@ -75,7 +54,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         return memos.size();
     }
 
-    class Holder extends RecyclerView.ViewHolder{
+    class Holder extends RecyclerView.ViewHolder {
+
 
         CheckBox checkBox;
         TextView title, date;
@@ -98,8 +78,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
             this.date.setText(date);
         }
 
-        public void setCheckBox(boolean isChecked) {
-            this.checkBox.setChecked(isChecked);
+        public CheckBox getCheckBox() {
+            return checkBox;
+        }
+
+        public void setCheckBox(CheckBox checkBox) {
+            this.checkBox = checkBox;
         }
 
         public Holder(View itemView) {
@@ -114,12 +98,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
                 public void onClick(View v) {
 
                     // TODO 완성하기
-                    Intent intent =  new Intent(v.getContext(), DetailActivity.class);
+                    Intent intent = new Intent(v.getContext(), DetailActivity.class);
+                    // TODO value로 memo.getId(); 넘기기 위해 memo를 전역으로 빼줌
                     intent.putExtra(DOC_KEY, memo.getId());
                     v.getContext().startActivity(intent);
 
                 }
             });
         }
+//
+//       public List<Memo> getDelMemoList(){
+//           return //TODO 리턴 로직 완성하기
+//        }
     }
 }

@@ -35,7 +35,6 @@ public class DetailActivity extends AppCompatActivity {
             memo_id = bundle.getInt(DOC_KEY);
         }
 
-
         init();
         clickListener();
         loadMemo();
@@ -82,7 +81,7 @@ public class DetailActivity extends AppCompatActivity {
             Log.i("메모 생성", "===================[ 새메모 생성 ]");
             dao.create(memo);
         }
-        // TODO 이 부분 리뷰하기
+        // TODO === [ .notifiyDateChanged ] ===
         memos.clear();
         // 새로 추가한 로직
         memos.add(memo);
@@ -96,7 +95,7 @@ public class DetailActivity extends AppCompatActivity {
             edit_content.setText(memo.getContent());
         }
     }
-    // TODO 이 부분 리뷰하기
+    // TODO === [ .notifiyDateChanged ] ===
     private void deleteMemo(){
         dao.delete(memo_id);
         memos.remove(memo);
