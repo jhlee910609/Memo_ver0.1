@@ -34,8 +34,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnAdd = (Button) findViewById(R.id.btnAdd);
 
         clickListener();
+        // TODO 싱클턴 로직 추가
+        dao = MemoDao.getInstance(this);
 
-        dao = new MemoDao(this);
+        //dao = new MemoDao(this);
         Log.i("READ ALL", "================= [ Main : readall ] ");
         // TODO onResume(); 시, 두 번 호출되기 때문에 다시 생각하기
         memos = dao.readAll();
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(v.getContext(), DetailActivity.class);
                 startActivity(intent);
                 break;
-            // TODO 수정했음
+            // TODO 코드 수정해야함
             case R.id.btnDel:
 /*
                 delMemos = RecyclerAdapter.checkedList;
@@ -85,10 +87,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("메모 다시 무르기", "============ [ dao.readall] ");
+        Log.i("데이터 최신화 ", "============ [ dao.readAll(); ]");
         memos = dao.readAll();
         adapter.setMemoList(memos);
-        Log.i("Notify", "================ [ 데이터 갱신 ]");
+        Log.i("Notify", "================ [ .notifyDataChanged(); ]");
         adapter.notifyDataSetChanged();
     }
 }

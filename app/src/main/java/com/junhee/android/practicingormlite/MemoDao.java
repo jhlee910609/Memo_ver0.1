@@ -15,6 +15,14 @@ public class MemoDao {
 
     DBHelper dbHelper = null;
     Dao<Memo, Integer> dao = null;
+    private static MemoDao memoDao = null;
+
+    public static MemoDao getInstance(Context context){
+        if(memoDao == null){
+            memoDao = new MemoDao(context);
+        }
+        return memoDao;
+    }
 
     public MemoDao(Context context) {
         dbHelper = DBHelper.getInstance(context);

@@ -43,6 +43,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         holder.setTitle(memo.getTitle());
         holder.setDate(memo.getDate().toString());
         holder.setMemo_id(memo.getId());
+
     }
 
     public void setMemoList(List<Memo> memos) {
@@ -55,7 +56,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
     }
 
     class Holder extends RecyclerView.ViewHolder {
-
 
         CheckBox checkBox;
         TextView title, date;
